@@ -5,7 +5,8 @@ var containerDiv = $(".container");
 $("#currentDay").text(moment().format("dddd, MMMM Do"));
 
 //I also need to know the current hour
-var currentTime = moment().format("ha");
+// var currentTime = moment().format("ha");
+var currentTime = "8am";
 
 
 //i will need to create 9 divs for each hour from 9am to 5pm
@@ -22,12 +23,17 @@ for (var i=0; i<workHours.length; i++) {
     var hourBlock = $("<div>").text(workHours[i]).attr("class", "col-1 hour time-block");
     hourRow.append(hourBlock);
 
-    if (currentIndex==-1 && currentTime[1]=="a") {
+    //this code will set the background color of the text area field depending on the current time
+    if (currentIndex==-1 && currentTime.includes("a")===true) {
         var textBlock = $("<textarea>").attr("class", "col-10 future");
-    } else if  (currentIndex==-1 && currentTime[1]=="p") {
+    } else if  (currentIndex==-1 && currentTime.includes("p")===true) {
         var textBlock = $("<textarea>").attr("class", "col-10 past");
-    } else {
+    } else if (i<currentIndex) {
+        var textBlock = $("<textarea>").attr("class", "col-10 past");
+    } else if (i==currentIndex) {
         var textBlock = $("<textarea>").attr("class", "col-10 present");
+    } else {
+        var textBlock = $("<textarea>").attr("class", "col-10 future");
     }
     
     hourRow.append(textBlock);
