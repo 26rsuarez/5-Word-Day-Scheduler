@@ -82,15 +82,23 @@ $(document).ready(function() {
       .attr("class", "fas fa-save fa-2x saved")
       .attr("data-index", i);
     saveBlock.append(saveButton);
+
+    // if there is already text in local storage it will change the text of the corresponding text area
+    if (localStorage.getItem(i) !==null){
+      var oldText = localStorage.getItem(i);
+      $("textarea[id="+i+"]").text(oldText);
+    }
   }
 
+  
+  // when a user clicks a save button the text in the text area will be saved in localStorage 
   $(".saved").on("click", function(event) {
       var value = $(this).attr("data-index");
-      var textToSave = $("textarea[id="+value+"]").val()
+      var textToSave = $("textarea[id="+value+"]").val();
       var savedText = localStorage.setItem(value, textToSave);
 
     });
-    // if there is content in the local storage it will be shown
+    
 });
 
 
