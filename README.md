@@ -1,1 +1,1 @@
-# 5-Word-Day-Scheduler
+# 5-Work-Day-Scheduler
