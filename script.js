@@ -26,8 +26,9 @@ var currentIndex = workHours.indexOf(currentTime);
 console.log(currentIndex);
 
 //this code will create the base layout of the page
-$(document).ready(function () {
+$(document).ready(function() {
   for (var i = 0; i < workHours.length; i++) {
+
     var hourRow = $("<div>").attr("class", "row");
     containerDiv.append(hourRow);
     var hourBlock = $("<div>")
@@ -46,6 +47,7 @@ $(document).ready(function () {
         .attr("class", "col-10 past")
         .attr("id", i);
     }
+
     // if the currentime is an hour before then it will display event that already happened
     else if (i < currentIndex) {
       if (i == currentIndex - 1) {
@@ -58,6 +60,7 @@ $(document).ready(function () {
           .attr("class", "col-10 past")
           .attr("id", i);
       }
+
     //this sets the current time to present and adds some preset text
     } else if (i == currentIndex) {
       var textBlock = $("<textarea>")
@@ -71,13 +74,26 @@ $(document).ready(function () {
         .attr("class", "col-10 future")
         .attr("id", i);
     }
-
+    //this will create a button used to save
     hourRow.append(textBlock);
     var saveBlock = $("<div>").attr("class", "col-1 btn btn-block saveBtn");
     hourRow.append(saveBlock);
     var saveButton = $("<i>")
-      .attr("class", "fas fa-save fa-2x")
-      .attr("id", "saved");
+      .attr("class", "fas fa-save fa-2x saved")
+      .attr("data-index", i);
     saveBlock.append(saveButton);
   }
+
+  $(".saved").on("click", function(event) {
+      var value = $(this).attr("data-index");
+      var textToSave = $("textarea[id="+value+"]").val()
+      var savedText = localStorage.setItem(value, textToSave);
+
+    });
+    // if there is content in the local storage it will be shown
 });
+
+
+
+
+
