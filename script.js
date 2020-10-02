@@ -5,10 +5,10 @@ var containerDiv = $(".container");
 $("#currentDay").text(moment().format("dddd, MMMM Do"));
 
 //I also need to know the current hour
-var currentTime = moment().format("ha");
-// var currentTime = "4pm";
+// var currentTime = moment().format("ha");
+var currentTime = "1pm";
 
-//i will need to create 9 divs for each hour from 9am to 5pm
+//i will need to create 9 div blocks for each hour from 9am to 5pm
 var workHours = [
   "9am",
   "10am",
