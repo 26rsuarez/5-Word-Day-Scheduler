@@ -5,8 +5,8 @@ var containerDiv = $(".container");
 $("#currentDay").text(moment().format("dddd, MMMM Do"));
 
 //I also need to know the current hour
-// var currentTime = moment().format("ha");
-var currentTime = "1pm";
+var currentTime = moment().format("ha");
+// var currentTime = "1pm";
 
 //i will need to create 9 div blocks for each hour from 9am to 5pm
 var workHours = [
@@ -36,8 +36,8 @@ $(document).ready(function() {
       .attr("class", "col-1 hour time-block");
     hourRow.append(hourBlock);
 
-    //this code will create a text box and set the background color of the text area field
-    //depending on the current time
+    //this code will create a text and deals with the issue of the user not being on the
+    //site in an hour during the work day
     if (currentIndex == -1 && currentTime.includes("a") === true) {
       var textBlock = $("<textarea>")
         .attr("class", "col-10 future")
@@ -48,7 +48,7 @@ $(document).ready(function() {
         .attr("id", i);
     }
 
-    // if the currentime is an hour before then it will display event that already happened
+    // if the hour has passed then it will display event already happened
     else if (i < currentIndex) {
       if (i == currentIndex - 1) {
         var textBlock = $("<textarea>")
@@ -61,20 +61,20 @@ $(document).ready(function() {
           .attr("id", i);
       }
 
-    //this sets the current time to present and adds some preset text
+    //this sets the current hour to present and adds some preset text
     } else if (i == currentIndex) {
       var textBlock = $("<textarea>")
         .text("Current hour")
         .attr("class", "col-10 present")
         .attr("id", i);
-    //this sets the future time and adds some preset text
+    //this sets the future hours and adds some preset text to change
     } else {
       var textBlock = $("<textarea>")
         .text("Change Event")
         .attr("class", "col-10 future")
         .attr("id", i);
     }
-    //this will create a button used to save
+    //this will create a button used to save each text block
     hourRow.append(textBlock);
     var saveBlock = $("<div>").attr("class", "col-1 btn btn-block saveBtn");
     hourRow.append(saveBlock);
